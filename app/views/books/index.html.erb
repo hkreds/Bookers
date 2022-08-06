@@ -2,16 +2,35 @@
 <h1>Books</h1>
 <table>
   <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th colspan="3"></th>
-    </tr>
+    <th>Title</th>
+    <th>Body</th>
+    <th colspan ="3"></th>
   </thead>
+  <% @books.each do |book| %>
+  <tbody>
+    <tr>
+      <td>
+        <%= book.title %>
+      </td>
+      <td>
+        <%= book.body %>
+      </td>
+      <td>
+        <%= link_to "Show", book_path(book.id) %>
+      </td>
+      <td>
+        <%= link_to "Edit", book_path(book.id) %>
+      </td>
+      <td>
+        <%= link_to "Destroy", book_path(book.id) %>
+      </td>
+    </tr>
+  </tbody>
+  <% end %>
 </table>
 
 <h2>New book</h2>
-<%= form_with model: @book do |f| %>
+<%= form_with model: @book, url: 'books', method: :post do |f| %>
   <h4>Title</h4>
   <%= f.text_field :title %>
 
@@ -20,4 +39,3 @@
 
   <%= f.submit 'Create Book' %>
 <% end %>
-
